@@ -3,20 +3,18 @@ import ContactForm from "./ContactForm";
 import firebaseDb from "../firebase";
 import GetLocation from './GetLocation';
 import DatePicker from "react-datepicker";
-import PatientNetwork from './PatientNetwork';
 import { format } from 'date-fns'
 
 import "react-datepicker/dist/react-datepicker.css";
 
-
-const Contacts = () => {
+const PatientNetwork = () => {
 
 	var [currentId, setCurrentId] = useState('');
     var [contactObjects, setContactObjects] = useState({})
     const [startDate, setStartDate] = useState(new Date());
     //Once components load complete
     useEffect(() => {
-        firebaseDb.child('contacts').on('value', snapshot => {
+        firebaseDb.child('scanned_data').on('value', snapshot => {
             if (snapshot.val() != null) {
                 setContactObjects({
                     ...snapshot.val()
@@ -25,39 +23,6 @@ const Contacts = () => {
         })
     }, [])
 
-
-    const addOrEdit = (obj) => {
-        if (currentId === '')
-            firebaseDb.child('contacts').push(
-                obj,
-                err => {
-                    if (err)
-                        console.log(err)
-                    else
-                        setCurrentId('')
-                })
-        else
-            firebaseDb.child(`contacts/${currentId}`).set(
-                obj,
-                err => {
-                    if (err)
-                        console.log(err)
-                    else
-                        setCurrentId('')
-                })
-    }
-
-    const onDelete = id => {
-        if (window.confirm('Are you sure to delete this record?')) {
-            firebaseDb.child(`contacts/${id}`).remove(
-                err => {
-                    if (err)
-                        console.log(err)
-                    else
-                        setCurrentId('')
-                })
-        }
-    }
 
     const filterWithDate = (date) => {
         //console.log(date);
@@ -76,12 +41,12 @@ const Contacts = () => {
         <>
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-4 text-center">Register Patients</h1>
+                    <h1 className="display-4 text-center">Patient Network</h1>
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-6 ">
-                    <ContactForm {...({ currentId, contactObjects, addOrEdit })} ></ContactForm>
+                   
                 </div>
 
                 <div className="col-md-14 mt-5">
@@ -106,12 +71,12 @@ const Contacts = () => {
                             <tr>
                             
                                 <th>Date</th>
-                                <th>NIC</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Address</th>
-                                <th>Actions</th>
+                                <th>NIC</th>
+                                <th>Location</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,23 +85,23 @@ const Contacts = () => {
                                     <tr key={key}>
                                         
                                         <td>{contactObjects[key].currentDateTimeString}</td>
-                                        <td>{contactObjects[key].nic}</td>
-                                        <td>{contactObjects[key].fullName}</td>
-                                        <td>{contactObjects[key].mobile}</td>
+                                        <td>{contactObjects[key].name}</td>
+                                        <td>{contactObjects[key].contactNo}</td>
                                         <td>{contactObjects[key].email}</td>
                                         <td>{contactObjects[key].address}</td>
+                                        <td>{contactObjects[key].nic}</td>
 
-                                        <td className="bg-light">
+                                        {/* <td className="bg-light">
                                             <a className="btn text-primary" onClick={() => { setCurrentId(key) }}>
                                                 <i className="fas fa-pencil-alt"></i>
                                             </a>
                                             <a className="btn text-danger" onClick={() => { onDelete(key) }}>
                                                 <i className="far fa-trash-alt"></i>
                                             </a>
-                                        </td>
-                                        {/* <td className="bg-light">
-                                            <GetLocation lat={contactObjects[key].latitude} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} />
                                         </td> */}
+                                        <td className="bg-light">
+                                            <GetLocation lat={contactObjects[key].latitude} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} />
+                                        </td>
                                     </tr>
                                 ))
                             }
@@ -144,10 +109,8 @@ const Contacts = () => {
                     </table>
                 </div>
             </div>
-            < hr/>
-            <PatientNetwork />
         </>
     );
 }
 
-export default Contacts;       
+export default PatientNetwork;
