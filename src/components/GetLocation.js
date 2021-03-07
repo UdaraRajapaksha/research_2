@@ -27,6 +27,40 @@ export class GetLocation extends Component {
       });
     }
   };
+  renderMap = () => {
+<div className="modal-body text-center" style={{ height:'60vh'}}>
+                  <Map
+                      google={this.props.google}
+                      zoom={14}
+                      style={mapStyles}
+                      initialCenter={
+                      {
+                          lat: this.props.lat,
+                          lng: this.props.long
+                      }
+                      }
+                  >
+                  <Marker
+                      onClick={this.onMarkerClick}
+                      name={'Kenyatta International Convention Centre'}
+                  />
+                  <InfoWindow
+                      marker={this.state.activeMarker}
+                      visible={this.state.showingInfoWindow}
+                      onClose={this.onClose}
+                  >
+                  <div>
+                      <h4>Place</h4>
+                  </div>
+                  </InfoWindow>
+                  </Map>
+              </div>
+  };
+  noMap = () => {
+    <div className="modal-body text-center" style={{ height:'60vh'}}>
+                   <p>Cannot Track</p>
+                </div>
+  };
   render() {
     return (
         <div>
@@ -43,33 +77,7 @@ export class GetLocation extends Component {
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="modal-body text-center" style={{ height:'60vh'}}>
-                    <Map
-                        google={this.props.google}
-                        zoom={14}
-                        style={mapStyles}
-                        initialCenter={
-                        {
-                            lat: this.props.lat,
-                            lng: this.props.long
-                        }
-                        }
-                    >
-                    <Marker
-                        onClick={this.onMarkerClick}
-                        name={'Kenyatta International Convention Centre'}
-                    />
-                    <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}
-                        onClose={this.onClose}
-                    >
-                    <div>
-                        <h4>Place</h4>
-                    </div>
-                    </InfoWindow>
-                    </Map>
-                </div>
+                {this.renderMap()}
                 </div>
             </div>
             </div>

@@ -77,6 +77,7 @@ const PatientNetwork = () => {
                                 <th>Address</th>
                                 <th>NIC</th>
                                 <th>Location</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +101,14 @@ const PatientNetwork = () => {
                                             </a>
                                         </td> */}
                                         <td className="bg-light">
-                                            <GetLocation lat={contactObjects[key].latitude} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} />
+                                          <GetLocation lat={contactObjects[key].latitude} sub={contactObjects[key].subscription} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} />
+                                           {/* {(contactObjects[key].subscription == 0) ? <GetLocation lat={contactObjects[key].latitude} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} /> : <i className="fas fa-search-location"></i>} */}
+                                            
+                                            
+                                            
+                                        </td>
+                                        <td>
+                                            {contactObjects[key].subscription == 0 ? "Can Track" : "Cannot Track"}
                                         </td>
                                     </tr>
                                 ))
