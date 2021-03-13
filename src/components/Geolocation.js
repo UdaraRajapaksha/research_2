@@ -1,4 +1,17 @@
-{/* Content-Type: application/json<br>
+
+import axios from 'axios';
+
+export const getLocation = async (number) => {
+  try {
+    const res = await axios.get(`https://ideabiz.lk/apicall/location?address=${number}&requestedAccuracy =1000`);
+    const locationData = await res.terminalLocationList.terminalLo0cation.currentLocation;
+    return locationData;
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+/* Content-Type: application/json<br>
 Authorization: Bearer [access token]<br>
 Accept: application/json<br>
 
@@ -18,4 +31,4 @@ Accept: application/json<br>
     }
 }
 
-*/}
+*/

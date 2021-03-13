@@ -10,7 +10,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 const Contacts = () => {
-
 	var [currentId, setCurrentId] = useState('');
     var [contactObjects, setContactObjects] = useState({})
     const [startDate, setStartDate] = useState(new Date());

@@ -1,3 +1,23 @@
+
+import axios from 'axios';
+
+export const pinSubscription = async (method, msisdn) => {
+  const config = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer toekn`,
+    'Accept': 'application/json'
+  };
+ const res = await axios.post('https://ideabiz.lk/apicall/pin/subscription/v1/subscribe',{method,msisdn}, config);
+ const pinSub = res.data;
+ return pinSub;
+};
+
+export const submitPin = async (pin, serverRef) => {
+  const res = await axios.post('https://ideabiz.lk/apicall/pin/subscription/v1/submitPin',{pin, serverRef});
+  const data = res.statusCode;
+  return data;
+};
+
 {/*{
   "statusCode": "SUCCESS",
   "message": null,

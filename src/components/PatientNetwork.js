@@ -4,6 +4,8 @@ import firebaseDb from "../firebase";
 import GetLocation from './GetLocation';
 import DatePicker from "react-datepicker";
 import { format } from 'date-fns'
+import ImgCan from './Images/green.jpg';
+import ImgCannot from './Images/red.jpg';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -28,7 +30,7 @@ const PatientNetwork = () => {
         //console.log(date);
         setStartDate(date);
         //console.log(format(date, 'dd-MM-yyyy'));
-        firebaseDb.child("contacts").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
+        firebaseDb.child("scanned_data").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
                 if (snapshot.val() != null) {
                     setContactObjects({
                         ...snapshot.val()
@@ -77,7 +79,7 @@ const PatientNetwork = () => {
                                 <th>Address</th>
                                 <th>NIC</th>
                                 <th>Location</th>
-                                <th></th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,7 +110,9 @@ const PatientNetwork = () => {
                                             
                                         </td>
                                         <td>
-                                            {contactObjects[key].subscription == 0 ? "Can Track" : "Cannot Track"}
+                                        <img src={contactObjects[key].subscription == 0 ? ImgCan : ImgCannot} height = "20" width="20"></img>
+                                            {/* {contactObjects[key].subscription == 0 ? "Can Track" : "Cannot Track"} */}
+                                            {/* {contactObjects[key].subscription == 0 ? img.src={Image} : "Cannot Track"} */}
                                         </td>
                                     </tr>
                                 ))

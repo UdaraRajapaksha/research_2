@@ -1,13 +1,7 @@
 import firebase from "firebase";
+import "firebase/auth";
 
   var firebaseConfig = {
-    // apiKey: "AIzaSyAdO5NGiZ4VnO7JUuUJAdDU-IuqwtG7NVA",
-    // authDomain: "patient-network-d3b05.firebaseapp.com",
-    // databaseURL: "https://patient-network-d3b05.firebaseio.com",
-    // projectId: "patient-network-d3b05",
-    // storageBucket: "patient-network-d3b05.appspot.com",
-    // messagingSenderId: "500077093633",
-    // appId: "1:500077093633:web:e52eb436fd94c8675af100"
 
     apiKey: "AIzaSyD-ltskaSuyzwkFeSrSiuRvh8hdV8L9RIs",
     authDomain: "opd-assistant.firebaseapp.com",
@@ -18,7 +12,25 @@ import firebase from "firebase";
     appId: "1:621721647648:web:a21b2d4b7c30a1f5401a45"
   };
 
-// Initialize Firebase
-var fireDb = firebase.initializeApp(firebaseConfig);
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyDFabXNcQsec1X-16kG2maU3-YBDyb4sk4",
+  //   authDomain: "opd-assistant.firebaseapp.com",
+  //   databaseURL: "https://opd-assistant.firebaseio.com",
+  //   projectId: "opd-assistant",
+  //   storageBucket: "opd-assistant.appspot.com",
+  //   messagingSenderId: "621721647648",
+  //   appId: "1:621721647648:web:8039228169d1a2e1401a45"
+  // };
+  
 
-export default fireDb.database().ref();
+// Initialize Firebase
+//var fireDb = firebase.initializeApp(firebaseConfig);
+
+//export default fireDb.database().ref();
+
+//export default fireDb;
+firebase.initializeApp(firebaseConfig);
+export const auth = firebase.auth();
+// export default firebase.database().ref();
+export default firebase.database().ref();
+

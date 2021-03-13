@@ -1,12 +1,31 @@
-{/*
-SMS API, Charging API, Balance Check API
+// const 
 
-Content-Type: application/json 
-Authorization: Bearer [access token]
-Accept: application/json
+// https://ideabiz.lk/apicall/subscription/v3/subscribe
 
-Content-Type: application/json 
-Authorization: Bearer a92ba8e8hjgjhgjh3fa1609cabcd79
-Accept: application/json
 
-*/}
+// https://ideabiz.lk/apicall/subscription/v3/unsubscribe
+
+// {
+//     "method":"WEB",
+//     "msisdn": "tel:+94766691500",    
+//     "serviceID": "ajer78-weer2-werd-wrfed"  
+// }
+
+// {
+//     "statusCode": "SUCCESS",
+//     "message": "",
+//     "data": {
+//        "subscribeResponse":{
+//            "msisdn": "tel:+94766691500",
+//            "status": "UNSUBSCRIBED",
+//        "serviceID": null
+//          }
+//      }
+// }
+import axios from 'axios';
+
+export const unSubscribe = async (method,msisdn,serviceID) => {
+    const res = await axios.post('https://ideabiz.lk/apicall/subscription/v3/unsubscribe',{method,msisdn,serviceID});
+    const unsub = res.data;
+    return unsub;
+}

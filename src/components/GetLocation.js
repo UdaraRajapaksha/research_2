@@ -1,49 +1,14 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import Image from './Images/sad-face.jpg';
+
 
 const mapStyles = {
   width: '96%',
   height: '70%'
 };
 
-// const RenderMap = ({lat, long}) => {
-//   return (<>
-//   <div className="modal-body text-center" style={{ height:'60vh'}}>
-//                     <Map
-//                         google={this.props.google}
-//                         zoom={14}
-//                         style={mapStyles}
-//                         initialCenter={
-//                         {
-//                             lat: lat,
-//                             lng: long
-//                         }
-//                         }
-//                     >
-//                     <Marker
-//                         onClick={this.onMarkerClick}
-//                         name={'Kenyatta International Convention Centre'}
-//                     />
-//                     <InfoWindow
-//                         marker={this.state.activeMarker}
-//                         visible={this.state.showingInfoWindow}
-//                         onClose={this.onClose}
-//                     >
-//                     <div>
-//                         <h4>Place</h4>
-//                     </div>
-//                     </InfoWindow>
-//                     </Map>
-//                 </div>
-//   </>)
-//     };
-//     const NoMap = () => {
-//       return (<>
-//       <div className="modal-body text-center" style={{ height:'60vh'}}>
-//                      <p>Cannot Track</p>
-//                   </div>
-//       </>);
-//     };
+
 export class GetLocation extends Component {
     state = {
         showingInfoWindow: false, 
@@ -108,7 +73,14 @@ export class GetLocation extends Component {
                     </InfoWindow>
                     </Map>
                 </div>) : (<div className="modal-body text-center" style={{ height:'60vh'}}>
-                     <p>Cannot Track</p>
+                  <br></br> <br></br> <br></br>
+                     <h3>Sorry !!! Can't track this patient as not subscribed to the Patient Tracking System </h3>
+
+                     <img src={Image} height = "190" width="190" alt="sad-face.jpg"></img>
+                     
+                     
+
+
                   </div>)}
                 </div>
             </div>
