@@ -1,16 +1,15 @@
 import firebase from "firebase";
 import "firebase/auth";
 
-  var firebaseConfig = {
-
-    apiKey: "AIzaSyD-ltskaSuyzwkFeSrSiuRvh8hdV8L9RIs",
-    authDomain: "opd-assistant.firebaseapp.com",
-    databaseURL: "https://opd-assistant.firebaseio.com",
-    projectId: "opd-assistant",
-    storageBucket: "opd-assistant.appspot.com",
-    messagingSenderId: "621721647648",
-    appId: "1:621721647648:web:a21b2d4b7c30a1f5401a45"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCMd0tstqifiqRx_fFpXhx3EZx1LBk4dpU",
+  authDomain: "opd-assistant.firebaseapp.com",
+  databaseURL: "https://opd-assistant.firebaseio.com",
+  projectId: "opd-assistant",
+  storageBucket: "opd-assistant.appspot.com",
+  messagingSenderId: "621721647648",
+  appId: "1:621721647648:web:47a17e8630da5b6a401a45"
+};
 
   // const firebaseConfig = {
   //   apiKey: "AIzaSyDFabXNcQsec1X-16kG2maU3-YBDyb4sk4",
@@ -32,5 +31,5 @@ import "firebase/auth";
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 // export default firebase.database().ref();
-export default firebase.database().ref();
+export default firebase;
 

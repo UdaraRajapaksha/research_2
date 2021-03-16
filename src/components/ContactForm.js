@@ -58,7 +58,7 @@ const ContactForm = (props) => {
 
 
     return (
-        <form autoComplete="off" onSubmit={handleFormSubmit} >
+        <form autoComplete="off" onSubmit={handleFormSubmit}>
             <div className="form-row"> 
             <div className="form-group input-group ">
                 <div className="input-group-prepend">

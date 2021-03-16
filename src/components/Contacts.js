@@ -7,6 +7,7 @@ import PatientNetwork from './PatientNetwork';
 import { format } from 'date-fns'
 
 import "react-datepicker/dist/react-datepicker.css";
+import Hero from '../Hero';
 
 
 const Contacts = () => {
@@ -15,7 +16,7 @@ const Contacts = () => {
     const [startDate, setStartDate] = useState(new Date());
     //Once components load complete
     useEffect(() => {
-        firebaseDb.child('contacts').on('value', snapshot => {
+        firebaseDb.database().ref().child('contacts').on('value', snapshot => {
             if (snapshot.val() != null) {
                 setContactObjects({
                     ...snapshot.val()
@@ -27,7 +28,7 @@ const Contacts = () => {
 
     const addOrEdit = (obj) => {
         if (currentId === '')
-            firebaseDb.child('contacts').push(
+            firebaseDb.database().ref().child('contacts').push(
                 obj,
                 err => {
                     if (err)
@@ -36,7 +37,7 @@ const Contacts = () => {
                         setCurrentId('')
                 })
         else
-            firebaseDb.child(`contacts/${currentId}`).set(
+            firebaseDb.database().ref().child(`contacts/${currentId}`).set(
                 obj,
                 err => {
                     if (err)
@@ -48,7 +49,7 @@ const Contacts = () => {
 
     const onDelete = id => {
         if (window.confirm('Are you sure to delete this record?')) {
-            firebaseDb.child(`contacts/${id}`).remove(
+            firebaseDb.database().ref().child(`contacts/${id}`).remove(
                 err => {
                     if (err)
                         console.log(err)
@@ -62,7 +63,7 @@ const Contacts = () => {
         //console.log(date);
         setStartDate(date);
         //console.log(format(date, 'dd-MM-yyyy'));
-        firebaseDb.child("contacts").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
+        firebaseDb.database().ref().child("contacts").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
                 if (snapshot.val() != null) {
                     setContactObjects({
                         ...snapshot.val()
@@ -73,6 +74,7 @@ const Contacts = () => {
 
   return (
         <>
+        {/* <Hero /> */}
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
                     <h1 className="display-4 text-center">Register Patients</h1>

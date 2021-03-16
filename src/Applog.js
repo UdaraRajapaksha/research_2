@@ -1,9 +1,10 @@
 import logo from './logo.svg';
-import firebase, {auth} from './firebase';
+import firebase from './firebase';
 import React, { useState, useEffect } from "react";
 import Login from './Login';
 import Hero from './Hero';
 import './Applog.css';
+import Contacts from './components/Contacts';
 
 const App = () => {
   const [user,setUser] = useState("");
@@ -26,7 +27,7 @@ const App = () => {
 
   const handleLogin = () => {
     clearErrors();
-    auth
+    firebase.auth()
       .signInWithEmailAndPassword(email,password)
       .catch(err => {
         switch(err.code){
@@ -43,9 +44,9 @@ const App = () => {
   };
 
   const handleSignup = () => {
-    //console.log(email);
+    console.log(email);
     clearErrors();
-    auth
+    firebase.auth()
     .createUserWithEmailAndPassword(email,password)
     .catch(err => {
       switch(err.code){
@@ -61,11 +62,11 @@ const App = () => {
   }
 
     const handleLogout = () => {
-      auth.signOut();
+      firebase.auth().signOut();
     };
 
     const authListener = () => {
-      auth.onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged(user => {
         if(user){
           clearInputs();
           setUser(user);
@@ -83,7 +84,14 @@ const App = () => {
   return (
     <div className="App">
       {user ? (
-          <Hero handleLogout={handleLogout}/>
+        <>
+        <Hero handleLogout={handleLogout}/>
+        <div className='container'>
+          <Contacts  />
+        </div>
+        </>
+        
+          
       ) : (
 
         <Login 

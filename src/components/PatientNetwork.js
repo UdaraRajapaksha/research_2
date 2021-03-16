@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { format } from 'date-fns'
 import ImgCan from './Images/green.jpg';
 import ImgCannot from './Images/red.jpg';
+import Image from './Images/sad-face.jpg';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -16,7 +17,7 @@ const PatientNetwork = () => {
     const [startDate, setStartDate] = useState(new Date());
     //Once components load complete
     useEffect(() => {
-        firebaseDb.child('scanned_data').on('value', snapshot => {
+        firebaseDb.database().ref().child('scanned_data').on('value', snapshot => {
             if (snapshot.val() != null) {
                 setContactObjects({
                     ...snapshot.val()
@@ -30,7 +31,7 @@ const PatientNetwork = () => {
         //console.log(date);
         setStartDate(date);
         //console.log(format(date, 'dd-MM-yyyy'));
-        firebaseDb.child("scanned_data").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
+        firebaseDb.database().ref().child("scanned_data").orderByChild('currentDateTimeString').equalTo(format(date, 'dd-MM-yyyy')).on('value', snapshot => {
                 if (snapshot.val() != null) {
                     setContactObjects({
                         ...snapshot.val()
@@ -103,9 +104,33 @@ const PatientNetwork = () => {
                                             </a>
                                         </td> */}
                                         <td className="bg-light">
-                                          <GetLocation lat={contactObjects[key].latitude} sub={contactObjects[key].subscription} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} />
+                                            {contactObjects[key].subscription == 0 ? <GetLocation lat={contactObjects[key].latitude} sub={contactObjects[key].subscription} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} /> : (<a className="btn text-primary"  data-toggle="modal" data-target="#exampleModal">
+                <i className="fas fa-search-location"></i>
+            </a>)}
+                                            {/* <GetLocation lat={contactObjects[key].latitude} sub={contactObjects[key].subscription} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} /> */}
                                            {/* {(contactObjects[key].subscription == 0) ? <GetLocation lat={contactObjects[key].latitude} long={contactObjects[key].longitude} nic={contactObjects[key].nic} key={contactObjects[key].nic} /> : <i className="fas fa-search-location"></i>} */}
-                                            
+                                           <div class="modal"  id="exampleModal" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Location</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body text-center" style={{ height:'60vh'}}>
+                  <br></br> <br></br> <br></br>
+                     <h3>Sorry !!! Can't track this patient as not subscribed to the Patient Tracking System </h3>
+
+                     <img src={Image} height = "190" width="190" alt="sad-face.jpg"></img>
+                     
+                     
+
+
+                  </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                             
                                             
                                         </td>

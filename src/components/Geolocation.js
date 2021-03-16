@@ -18,7 +18,7 @@ Accept: application/json<br>
 {
     "terminalLocationList": {
         "terminalLocation": {
-            "address": "tel:+94777123456",
+            "address": "tel:+94766877142",
             "currentLocation": {
                 "accuracy": "10.0",
                 "altitude": "",

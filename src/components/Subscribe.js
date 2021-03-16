@@ -24,7 +24,7 @@ export const submitPin = async (pin, serverRef) => {
   "data": {
     "status": "PENDING_AUTH",
     "serverRef": "f07927b4030048be99dc051314b5f40e",
-    "msisdn": "tel:+94777339033",
+    "msisdn": "tel:+94766877142",
     "method": "ANC"
   }
 } 
@@ -35,7 +35,7 @@ export const submitPin = async (pin, serverRef) => {
   "data": {
     "status": "PENDING_AUTH",
     "serverRef": "f07927b4030048be99dc051314b5f40e",
-    "msisdn": "tel:+94777339033",
+    "msisdn": "tel:+94766877142",
     "serviceId" : "xxxx-xxxx-xxxxxxx",
     "method": "ANC"
   }
@@ -44,7 +44,8 @@ export const submitPin = async (pin, serverRef) => {
 {
   "pin": "520972",
   "serverRef": "958e39b574a042c290e6019f0590e7f5"
-}{
+}
+{
   "statusCode": "ERROR",
   "message": "Wrong PIN",
   "data": null
@@ -55,7 +56,7 @@ export const submitPin = async (pin, serverRef) => {
   "data": {
     "status": "SUBSCRIBED",
     "serverRef": "8f27e17b51de4b64baa6cd5525506516",
-    "msisdn": "tel:+94777123456",
+    "msisdn": "tel:+94766877142",
     "method": "ANC"
   }
 }*/}
